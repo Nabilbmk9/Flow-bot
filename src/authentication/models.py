@@ -22,7 +22,6 @@ class MyUserManager(BaseUserManager):
         return user
 
 
-
 class CustomUser(AbstractBaseUser):
     username = models.CharField(
         unique=True,
@@ -40,10 +39,15 @@ class CustomUser(AbstractBaseUser):
     is_admin = models.BooleanField(default=False)
 
     USERNAME_FIELD = "email"
-    objects=MyUserManager()
+    objects = MyUserManager()
 
     def has_perm(self, perm, obj=None):
         return True
 
     def has_module_perms(self, app_label):
         return True
+
+
+class Event(models.Model):
+    title = models.CharField(max_length=100)
+    details = models.CharField(max_length=100)
